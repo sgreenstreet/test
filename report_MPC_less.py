@@ -1,7 +1,7 @@
 '''
-This code will read in the MPC report file for 2003 RB and return 
+This code will read in the MPC report file for any object and return 
 every 8th entry from the LCOGT node at McDonald Observatory (V37) 
-in addition to rounding the magnitude values to 0.1 mag.
+in addition to rounding the magnitude values to one decimal place.
 '''
 
 import sys
@@ -21,6 +21,9 @@ def summarize_MPC_report(f):
 			    print "%s%.1f %s"%(part1, mag_num_round, part3),
     return
 
-MPC_file = open('2003_RB.dat')
+
+MPC_file = open(sys.argv[1],'r')
+
 summarize_MPC_report(MPC_file)
+
 MPC_file.close()
