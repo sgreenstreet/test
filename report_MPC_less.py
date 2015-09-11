@@ -22,6 +22,5 @@ def summarize_MPC_report(f):
     return
 
 MPC_file = open('2003_RB.dat')
-#f = open(sys.argv[1],'r')
 summarize_MPC_report(MPC_file)
 MPC_file.close()
