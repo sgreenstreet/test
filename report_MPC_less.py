@@ -1,6 +1,6 @@
 '''
 This code will read in the MPC report file for any object and return 
-every 8th entry from the LCOGT node at McDonald Observatory (V37) 
+every 8th entry from any observatory code 
 in addition to rounding the magnitude values to one decimal place.
 '''
 
@@ -8,10 +8,10 @@ import sys
 
 report_line = []
 
-def summarize_MPC_report(f):
+def summarize_MPC_report(f, code):
     num_line = 0
     for line in f:
-        if 'V37' in line:
+        if code in line:
             num_line += 1
             if num_line % 8 == 0:
                 part1 = line[0:65]
@@ -24,7 +24,7 @@ def summarize_MPC_report(f):
 
 MPC_file = open(sys.argv[1],'r')
 
-summarize_MPC_report(MPC_file)
+summarize_MPC_report(MPC_file,sys.argv[2])
 
 MPC_file.close()
 
