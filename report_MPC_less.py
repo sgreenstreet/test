@@ -15,8 +15,7 @@ from report_MPC_less_subs import *
 #open file, call summarize_MPC_report function, close file
 MPC_file = open(sys.argv[1],'r')
 
-site_only_lines = pull_site_lines(MPC_file,sys.argv[2],sys.argv[3])
-
+site_only_lines = pull_site_lines(MPC_file,sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
 report_line = summarize_MPC_report(site_only_lines)
 
 MPC_file.close()

@@ -18,7 +18,7 @@ class TestClass(unittest.TestCase):
                           'K6378         C2015 09 03.45479403 16 28.34 +62 22 06.4          15.73R      V37',
                          ]
 
-        result = pull_site_lines(lines, 'V37', '2015 09 03')
+        result = pull_site_lines(lines, 'V37', '2015', '09', '03')
         self.assertEqual (result, expected_lines)
 
     def test_pull_site_lines_for_correct_date(self):
@@ -38,7 +38,7 @@ class TestClass(unittest.TestCase):
                           'K6378         C2015 09 03.45479403 16 28.34 +62 22 06.4          15.73R      V37',
                          ]
 
-        result = pull_site_lines(lines, 'V37', '2015 09 03')
+        result = pull_site_lines(lines, 'V37', '2015', '09', '03')
         self.assertEqual (result, expected_lines)
 
     def test_too_many_lines(self):
@@ -64,6 +64,8 @@ class TestClass(unittest.TestCase):
                  'K6378         C2015 09 03.58479403 16 28.99 +62 22 19.4          15.78R      V37',
                  'K6378         C2015 09 03.59479403 16 29.04 +62 22 20.4          15.81R      V37',
                  'K6378         C2015 09 03.60479403 16 29.09 +62 22 21.4          15.76R      V37',
+                 'K6378         C2015 09 03.61479403 16 29.14 +62 22 22.4          15.77R      V37',
+                 'K6378         C2015 09 03.62479403 16 29.19 +62 22 23.4          15.74R      V37',
                  ]
         expected_lines = [['K6378         C2015 09 03.40479403 16 28.09 +62 22 01.4          ', 15.8, 'R      V37'],
                           ['K6378         C2015 09 03.42479403 16 28.19 +62 22 03.4          ', 15.7, 'R      V37'],
@@ -75,7 +77,23 @@ class TestClass(unittest.TestCase):
                           ['K6378         C2015 09 03.54479403 16 28.79 +62 22 15.4          ', 15.7, 'R      V37'],
                           ['K6378         C2015 09 03.56479403 16 28.89 +62 22 17.4          ', 15.8, 'R      V37'],
                           ['K6378         C2015 09 03.58479403 16 28.99 +62 22 19.4          ', 15.8, 'R      V37'],
-                          ['K6378         C2015 09 03.60479403 16 29.09 +62 22 21.4          ', 15.8, 'R      V37'],
+                         ]
+        result = summarize_MPC_report(lines)
+        self.assertEqual (result, expected_lines)
+
+    def test_too_few_lines(self):
+        lines = ['K6378         C2015 09 03.39479403 16 28.04 +62 22 00.4          15.72R      V37',
+                 'K6378         C2015 09 03.40479403 16 28.09 +62 22 01.4          15.77R      V37',
+                 'K6378         C2015 09 03.41479403 16 28.14 +62 22 02.4          15.72R      V37',
+                 'K6378         C2015 09 03.42479403 16 28.19 +62 22 03.4          15.74R      V37',
+                 'K6378         C2015 09 03.43479403 16 28.24 +62 22 04.4          15.79R      V37',
+
+                 ]
+        expected_lines = [['K6378         C2015 09 03.39479403 16 28.04 +62 22 00.4          ', 15.7, 'R      V37'],
+                          ['K6378         C2015 09 03.40479403 16 28.09 +62 22 01.4          ', 15.8, 'R      V37'],
+                          ['K6378         C2015 09 03.41479403 16 28.14 +62 22 02.4          ', 15.7, 'R      V37'],
+                          ['K6378         C2015 09 03.42479403 16 28.19 +62 22 03.4          ', 15.7, 'R      V37'],
+                          ['K6378         C2015 09 03.43479403 16 28.24 +62 22 04.4          ', 15.8, 'R      V37'],
                          ]
         result = summarize_MPC_report(lines)
         self.assertEqual (result, expected_lines)
