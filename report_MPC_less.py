@@ -6,16 +6,18 @@ command line) and will return only 10 lines to report to the MPC.
 In addition, it will round the magnitude values to one decimal 
 place.
 To run, use the following command: 
-python report_MPC_less.py ".dat file" "obs code"
+python report_MPC_less.py ".dat file" "obs code" "obs date wanted (2015 09 03)"
 '''
 
 import sys #allow reading arguments from the command line
-from report_MPC_less_subs import summarize_MPC_report
+from report_MPC_less_subs import *
     
 #open file, call summarize_MPC_report function, close file
 MPC_file = open(sys.argv[1],'r')
 
-report_line = summarize_MPC_report(MPC_file,sys.argv[2])
+site_only_lines = pull_site_lines(MPC_file,sys.argv[2],sys.argv[3])
+
+report_line = summarize_MPC_report(site_only_lines)
 
 MPC_file.close()
 
